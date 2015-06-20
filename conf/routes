@@ -3,11 +3,15 @@
 # ~~~~
 
 # Home page
-GET        /                    controllers.Application.index()
+GET         /                    controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
 
 # Users
-GET        /users               controllers.UserController.getAll()
-POST       /users               controllers.UserController.post()
+GET         /users               controllers.UserController.getAll()
+POST        /users               controllers.UserController.post()
+
+# Braintree
+GET         /clientToken         controllers.Application.payButton(customerId: String)
+POST        /paymentMethods      controllers.Application.paymentMethods
