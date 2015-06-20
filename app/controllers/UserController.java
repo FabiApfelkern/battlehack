@@ -2,7 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.User;
+import models.Account;
 import play.*;
 import play.data.Form;
 import play.db.jpa.Transactional;
@@ -20,14 +20,14 @@ public class UserController extends Controller {
 
     @Transactional
     public Result getAll() {
-        List<User> users = User.findAll();
+        List<Account> users = Account.findAll();
         return ok(Json.toJson(users));
     }
 
     @Transactional
     @BodyParser.Of(BodyParser.Json.class)
     public Result post(){
-        Form<User> form = Form.form(User.class).bindFromRequest();
+        Form<Account> form = Form.form(Account.class).bindFromRequest();
         if(form.hasErrors()){
             ObjectNode result = Json.newObject();
             result.put("error", form.errorsAsJson());
@@ -35,7 +35,7 @@ public class UserController extends Controller {
             return badRequest(result);
         }
         JsonNode json = request().body().asJson();
-        User newUser = Json.fromJson(json, User.class);
+        Account newUser = Json.fromJson(json, Account.class);
         newUser.create();
         return ok(Json.toJson(newUser));
     }
