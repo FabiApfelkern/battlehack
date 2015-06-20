@@ -9,6 +9,7 @@ scalaVersion := "2.11.6"
 libraryDependencies ++= Seq(
   javaJdbc,
   "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
+  "com.braintreepayments.gateway" % "braintree-java" % "2.45.0",
   cache,
   javaWs
 )
