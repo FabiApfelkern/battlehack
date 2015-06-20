@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Fabi on 19.06.2015.
 */
 
-@Entity
+@javax.persistence.Entity
 public class Account {
 
     @Id
