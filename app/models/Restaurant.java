@@ -3,12 +3,15 @@ package models;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints.Required;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "_meal")
+@Table(name = "_restaurant")
 public class Restaurant extends Model {
 
     @Id
@@ -17,9 +20,6 @@ public class Restaurant extends Model {
 
     @Required
     public String name;
-
-    @Required
-    public BigDecimal price;
 
     public static Finder<Long, Restaurant> find = new Finder<>(Restaurant.class);
 

@@ -7,24 +7,30 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "_order")
 public class Order extends Model {
 
     @Id
     @GeneratedValue
     public Long id;
 
-    @Required
-    public String name;
+    @OneToOne
+    public Transaction transaction;
+
+    @OneToOne
+    public Meal meal;
 
     @ManyToOne
     public Account account;
 
-    @ManyToOne
-    public BillingInformation billingInformation;
+    public static class OrderPay {
+        @Required
+        public String payment_method_nonce;
+    }
 
     public static Finder<Long,Order> find = new Finder<>(Order.class);
 
-    public static List<Order> findAll() {;
+    public static List<Order> findAll() {
         return find.all();
     }
 
@@ -33,7 +39,6 @@ public class Order extends Model {
     }
 
     public void create() {
-        this.password = Util.md5(this.password);
         this.save();
     }
 

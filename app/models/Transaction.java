@@ -3,19 +3,24 @@ package models;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints.Required;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "_transaction")
 public class Transaction extends Model {
 
     @Id
     @GeneratedValue
     public Long id;
 
-    @Required
-    public Long transactionId;
+    public String transaction_id;
+
+    @Column(name = "paid_at")
+    public Calendar paidAt;
 
     @Column(name = "created_at")
     public Date createdAt;

@@ -2,28 +2,42 @@ package models;
 
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Transactional;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "_order")
+@Table(name = "_meal")
 public class Meal extends Model {
 
     @Id
     @GeneratedValue
     public Long id;
 
-    @OneToOne
-    public Transaction transaction;
-
-    public Meal meal;
-
     @Required
     public String name;
 
+    @Required
+    public Double price;
+
+    @Required
     @ManyToOne
-    public Account account;
+    public Restaurant restaurant;
+
+    public static class MealOrder {
+        @Required
+        public Long id;
+    }
+
+    public static class MealList {
+        @Required
+        public String name;
+
+        @Required
+        public Double price;
+    }
 
     public static Finder<Long, Meal> find = new Finder<>(Meal.class);
 
@@ -34,6 +48,8 @@ public class Meal extends Model {
     public static Meal findById(Long id) {
         return find.byId(id);
     }
+
+    public static List<Meal> findByRestaurant(Long id) { return find.where().eq("restaurant_id", id).findList();}
 
     public void create() {
         this.save();

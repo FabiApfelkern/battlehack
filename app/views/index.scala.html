@@ -1,7 +1,7 @@
-@(message: String)
+@(meals: List[Meal])
 
-@main("Welcome to Play") {
+@main(meals) {
 
-    @play20.welcome(message, style = "Java")
+    @play20.welcome("Happy", style = "Java")
 
 }

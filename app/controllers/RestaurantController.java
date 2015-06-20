@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Account;
 import models.Meal;
 import models.Order;
 import models.Restaurant;
@@ -19,39 +20,33 @@ public class RestaurantController extends Controller {
     @Transactional
     //@Security.Authenticated(Secured.class)
     public Result getAll() {
+        List<Restaurant> restaurantsList = Restaurant.findAll();
 
-        List<Meal> mealList = new ArrayList<>();
-        List<Meal> users = Meal.findAll();
-        Form<Restaurant> form = Form.form(Restaurant.class).bindFromRequest();
-        if(form.hasErrors()){
-            ObjectNode result = Json.newObject();
-            result.set("error", form.errorsAsJson());
-            return badRequest(result);
-        }
-        Restaurant restaurant = form.get();
+        ObjectNode restaurantResult = Json.newObject();
+        restaurantResult.put("state", "success");
+        restaurantResult.put("count", restaurantsList.size());
+        restaurantResult.set("result", Json.toJson(restaurantsList));
 
-        List<Order> ordersList = new ArrayList<>();
+        return ok(restaurantResult);
+    }
 
+    @Transactional
+    //@Security.Authenticated(Secured.class)
+    public Result getMeals(Long restaurantId) {
+        List<Meal.MealList> saveMeals = new ArrayList<>();
+        List<Meal> mealList = Meal.findByRestaurant(restaurantId);
 
-        List<Order> ordersList = new ArrayList<>();
-        List<Order> orders = Order.findAll();
-        for(Order o: orders){
-            Order order = new Order();
-            order.name = o.name;
-            order.id = o.id;
-            order.transaction = o.transaction;
-            order.account = o.account;
-            ordersList.add(order);
+        for(Meal meal: mealList){
+            Meal.MealList mealsPublic = new Meal.MealList();
+            mealsPublic.name = meal.name;
+            mealsPublic.price = meal.price;
+            saveMeals.add(mealsPublic);
         }
 
         ObjectNode result = Json.newObject();
         result.put("state", "success");
-        result.put("count", orders.size());
-        result.set("result", Json.toJson(ordersList));
+        result.put("count", saveMeals.size());
+        result.set("result", Json.toJson(saveMeals));
         return ok(result);
     }
-
-
-
-
 }
