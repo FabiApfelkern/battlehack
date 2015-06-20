@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Account;
 import play.*;
 import play.data.Form;
-import play.db.jpa.Transactional;
+import play.db.ebean.Transactional;
 import play.libs.Json;
 import play.mvc.*;
 
