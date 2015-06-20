@@ -9,8 +9,9 @@ GET         /                    controllers.Application.index()
 GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
 
 # Users
-GET         /users               controllers.UserController.getAll()
-POST        /users               controllers.UserController.post()
+GET         /api/users           controllers.UserController.getAll()
+POST        /api/users           controllers.UserController.post()
+POST        /api/users/login     controllers.UserController.login()
 
 # Braintree
 GET         /clientToken         controllers.Application.payButton(customerId: String)
