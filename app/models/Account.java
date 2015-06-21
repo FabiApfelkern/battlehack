@@ -64,6 +64,15 @@ public class Account extends Model {
         @Required
         @Enumerated(EnumType.ORDINAL)
         public Roles role;
+
+        @Transactional
+        public String validate() {
+            Account account = Account.findByEmail(email);
+            if (account != null) {
+                return "Email Address already in use.";
+            }
+            return null;
+        }
     }
 
     public static class AccountLogin {

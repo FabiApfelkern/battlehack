@@ -43,6 +43,7 @@ public class RestaurantController extends Controller {
         Restaurant ar = form.get();
         Restaurant newRestaurant = new Restaurant();
         newRestaurant.name = ar.name;
+        newRestaurant.geo = ar.geo;
         newRestaurant.create();
 
         ObjectNode jsonResult = Json.newObject();

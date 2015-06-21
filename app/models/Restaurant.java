@@ -21,6 +21,9 @@ public class Restaurant extends Model {
     @Required
     public String name;
 
+    @Required
+    public String geo;
+
     public static Finder<Long, Restaurant> find = new Finder<>(Restaurant.class);
 
     public static List<Restaurant> findAll() {

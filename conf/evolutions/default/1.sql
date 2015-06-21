@@ -35,6 +35,7 @@ create table _order (
 create table _restaurant (
   id                        bigserial not null,
   name                      varchar(255),
+  geo                       varchar(255),
   constraint pk__restaurant primary key (id))
 ;
 
