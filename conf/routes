@@ -3,21 +3,24 @@
 # ~~~~
 
 # Home page
-GET         /                           controllers.Application.index()
+GET         /                                       controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)
 
 # Users
-GET         /api/users                  controllers.UserController.getAll()
-POST        /api/users                  controllers.UserController.post()
-POST        /api/users/login            controllers.UserController.login()
+GET         /api/users                              controllers.UserController.getAll()
+POST        /api/users                              controllers.UserController.post()
+POST        /api/users/login                        controllers.UserController.login()
 
 # Orders
-GET         /api/orders                 controllers.OrderController.getAll()
-POST        /api/orders                 controllers.OrderController.post()
-POST        /api/orders/:id/pay         controllers.OrderController.pay(id: Long)
+GET         /api/orders                             controllers.OrderController.getAll()
+POST        /api/orders                             controllers.OrderController.post()
+POST        /api/orders/:id/pay                     controllers.OrderController.pay(id: Long)
 
 # Restaurants
-GET         /api/restaurants            controllers.RestaurantController.getAll()
-GET         /api/restaurants/:id/meals  controllers.RestaurantController.getMeals(id: Long)
+GET         /api/restaurants                        controllers.RestaurantController.getAll()
+POST        /api/restaurants                        controllers.RestaurantController.post()
+GET         /api/restaurants/:restaurantId/meals    controllers.RestaurantController.getMeals(restaurantId: Long)
+POST        /api/restaurants/:restaurantId/meals    controllers.RestaurantController.postMeals(restaurantId: Long)
+GET         /api/restaurants/:restaurantId/orders   controllers.RestaurantController.getOrders(restaurantId: Long)

@@ -10,7 +10,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public Result index() {
-        return ok(index.render(Meal.findAll()));
+        return ok(index.render("Hallo Play"));
     }
 
 

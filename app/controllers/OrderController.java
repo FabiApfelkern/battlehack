@@ -60,7 +60,7 @@ public class OrderController extends Controller {
         Meal.MealOrder mealOrder = form.get();
         Order newOrder = new Order();
 
-        newOrder.meal = Meal.findById(mealOrder.id);
+        newOrder.meal = Meal.findById(mealOrder.meal_id);
 
         newOrder.account = Secured.currentAccount();
         newOrder.create();

@@ -28,7 +28,7 @@ public class Meal extends Model {
 
     public static class MealOrder {
         @Required
-        public Long id;
+        public Long meal_id;
     }
 
     public static class MealList {
