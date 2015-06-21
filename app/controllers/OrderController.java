@@ -20,6 +20,7 @@ import play.mvc.Security;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class OrderController extends Controller {
 
@@ -115,7 +116,7 @@ public class OrderController extends Controller {
         Order order = Order.findById(orderId);
 
         TransactionRequest request = new TransactionRequest()
-                .amount(new BigDecimal(order.meal.price))
+                .amount(BigDecimal.valueOf(order.meal.price))
                 .paymentMethodNonce(orderPublic.payment_method_nonce);
 
         com.braintreegateway.Result<com.braintreegateway.Transaction> result = BraintreeService.getInstance().getGateway().transaction().sale(request);
