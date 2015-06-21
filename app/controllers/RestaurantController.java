@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
+import play.Logger;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.libs.Json;
@@ -105,7 +106,7 @@ public class RestaurantController extends Controller {
 
         for(Order order: orderList){
             Order.OrderRestaurant ordersPublic = new Order.OrderRestaurant();
-            ordersPublic.account = order.account;
+            ordersPublic.account = Account.findById(order.account.id);
             ordersPublic.meal = order.meal;
             ordersPublic.transaction = order.transaction;
             saveOrder.add(ordersPublic);
