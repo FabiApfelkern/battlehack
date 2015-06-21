@@ -39,6 +39,14 @@ public class Meal extends Model {
         public Double price;
     }
 
+    public static class MealRestaurant {
+        public Long id;
+
+        public String name;
+
+        public Double price;
+    }
+
     public static Finder<Long, Meal> find = new Finder<>(Meal.class);
 
     public static List<Meal> findAll() {

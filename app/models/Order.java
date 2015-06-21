@@ -17,13 +17,13 @@ public class Order extends Model {
     @OneToOne
     public Transaction transaction;
 
-    @OneToOne
+    @ManyToOne
     public Meal meal;
 
     @ManyToOne
     public Account account;
 
-    @OneToOne
+    @ManyToOne
     public Restaurant restaurant;
 
     public static class OrderPay {
