@@ -23,9 +23,17 @@ public class Order extends Model {
     @ManyToOne
     public Account account;
 
+    public Restaurant restaurant;
+
     public static class OrderPay {
         @Required
         public String payment_method_nonce;
+    }
+
+    public static class OrderRestaurant {
+        public Transaction transaction;
+        public Meal meal;
+        public Account account;
     }
 
     public static Finder<Long,Order> find = new Finder<>(Order.class);
@@ -37,6 +45,8 @@ public class Order extends Model {
     public static Order findById(Long id) {
         return find.byId(id);
     }
+
+    public static List<Order> findByRestaurant(Long id) { return find.where().eq("restaurant_id", id).findList();}
 
     public void create() {
         this.save();
