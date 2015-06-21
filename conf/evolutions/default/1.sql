@@ -27,8 +27,10 @@ create table _order (
   transaction_id            bigint,
   meal_id                   bigint,
   account_id                bigint,
+  restaurant_id             bigint,
   constraint uq__order_transaction_id unique (transaction_id),
   constraint uq__order_meal_id unique (meal_id),
+  constraint uq__order_restaurant_id unique (restaurant_id),
   constraint pk__order primary key (id))
 ;
 
@@ -55,6 +57,8 @@ alter table _order add constraint fk__order_meal_3 foreign key (meal_id) referen
 create index ix__order_meal_3 on _order (meal_id);
 alter table _order add constraint fk__order_account_4 foreign key (account_id) references account (id);
 create index ix__order_account_4 on _order (account_id);
+alter table _order add constraint fk__order_restaurant_5 foreign key (restaurant_id) references _restaurant (id);
+create index ix__order_restaurant_5 on _order (restaurant_id);
 
 
 
