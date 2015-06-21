@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
+import play.Logger;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.libs.Json;
@@ -80,11 +81,12 @@ public class RestaurantController extends Controller {
     @Transactional
     //@Security.Authenticated(Secured.class)
     public Result getMeals(Long restaurantId) {
-        List<Meal.MealList> saveMeals = new ArrayList<>();
+        List<Meal.MealRestaurant> saveMeals = new ArrayList<>();
         List<Meal> mealList = Meal.findByRestaurant(restaurantId);
 
         for(Meal meal: mealList){
-            Meal.MealList mealsPublic = new Meal.MealList();
+            Meal.MealRestaurant mealsPublic = new Meal.MealRestaurant();
+            mealsPublic.id = meal.id;
             mealsPublic.name = meal.name;
             mealsPublic.price = meal.price;
             saveMeals.add(mealsPublic);
@@ -105,7 +107,7 @@ public class RestaurantController extends Controller {
 
         for(Order order: orderList){
             Order.OrderRestaurant ordersPublic = new Order.OrderRestaurant();
-            ordersPublic.account = order.account;
+            ordersPublic.account = Account.findById(order.account.id);
             ordersPublic.meal = order.meal;
             ordersPublic.transaction = order.transaction;
             saveOrder.add(ordersPublic);

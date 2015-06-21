@@ -29,8 +29,6 @@ create table _order (
   account_id                bigint,
   restaurant_id             bigint,
   constraint uq__order_transaction_id unique (transaction_id),
-  constraint uq__order_meal_id unique (meal_id),
-  constraint uq__order_restaurant_id unique (restaurant_id),
   constraint pk__order primary key (id))
 ;
 
