@@ -54,8 +54,7 @@ public class RestaurantController extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public Result postMeals(Long restaurantId){
 
-        Form<Meal> form = Form.form(Meal.class).bindFromRequest();
-        List<Meal> mealList = Meal.findByRestaurant(restaurantId);
+        Form<Meal.MealList> form = Form.form(Meal.MealList.class).bindFromRequest();
 
         if(form.hasErrors()){
             ObjectNode result = Json.newObject();
@@ -63,11 +62,11 @@ public class RestaurantController extends Controller {
             return badRequest(result);
         }
 
-        Meal mealRequest = form.get();
+        Meal.MealList mealRequest = form.get();
         Meal newMeal = new Meal();
         newMeal.name = mealRequest.name;
         newMeal.price = mealRequest.price;
-        newMeal.restaurant = mealRequest.restaurant;
+        newMeal.restaurant = Restaurant.findById(restaurantId);
 
         newMeal.create();
 

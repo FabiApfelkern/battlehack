@@ -11,6 +11,11 @@
         <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
     </head>
     <body>
+        <form id="checkout" method="post" action="/api/orders/1/pay">
+            <div id="payment-form"></div>
+            <input type="submit" value="Pay">
+        </form>
+
 
         <script>
         // We generated a client token for you so you can copy and paste this code

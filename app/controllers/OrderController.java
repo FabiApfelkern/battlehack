@@ -59,8 +59,17 @@ public class OrderController extends Controller {
 
         Meal.MealOrder mealOrder = form.get();
         Order newOrder = new Order();
+        Meal meal = Meal.findById(mealOrder.meal_id);
 
-        newOrder.meal = Meal.findById(mealOrder.meal_id);
+        if(meal == null) {
+            ObjectNode jsonResult = Json.newObject();
+            jsonResult.put("state", "failed");
+            jsonResult.put("reason", "meal not found");
+            return badRequest(jsonResult);
+        }
+
+        newOrder.meal = meal;
+        newOrder.restaurant = meal.restaurant;
 
         newOrder.account = Secured.currentAccount();
         newOrder.create();

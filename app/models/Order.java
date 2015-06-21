@@ -23,6 +23,7 @@ public class Order extends Model {
     @ManyToOne
     public Account account;
 
+    @OneToOne
     public Restaurant restaurant;
 
     public static class OrderPay {
